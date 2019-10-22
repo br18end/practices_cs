@@ -8,14 +8,15 @@ namespace ConsoleApplication1
 {
     class Program
     {
-        static int n, m, primos = 0, cont;
+        static int n, m, odds = 0, cont;
         static int[] some_data = new int[100];
+
         static void Main(string[] args)
         {
             n = Convert.ToInt32(Console.ReadLine());
             m = Convert.ToInt32(Console.ReadLine());
             Thread t1 = new Thread(new ThreadStart(digits));
-            Thread t2 = new Thread(new ThreadStart(nprimos));
+            Thread t2 = new Thread(new ThreadStart(nodds));
             t1.Start();
             t2.Start();
             t1.Join();
@@ -25,23 +26,23 @@ namespace ConsoleApplication1
             {
                 Console.WriteLine(some_data[i]+" ");
             }
-            Console.WriteLine("\nPrimos: "+primos);
+            Console.WriteLine("\nOdds: "+odds);
         }
         public static void digits()
         {
-            int aux, posicion = 0;
+            int aux, position = 0;
             for (int i = n; i <= m; i++)
             {
                 aux = i;
                 while (aux > 0)
                 {
-                    posicion = aux % 10;
-                    some_data[posicion]++;
+                    position = aux % 10;
+                    some_data[position]++;
                     aux = aux / 10;
                 }
             }
         }
-        public static void nprimos()
+        public static void nodds()
         {
             for (int i = n; i <= m; i++)
             {
@@ -55,7 +56,7 @@ namespace ConsoleApplication1
                 }
                 if (cont == 2)
                 {
-                    primos++;
+                    odds++;
                 }
             }
         }
